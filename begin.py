@@ -18,4 +18,5 @@ def runCommand(cmd,arg1,arg2):
             break
 
 runCommand('nmap','192.168.43.225-230','-p 10-30')
-runCommand('nmap','-O','127.0.0.1')
+#runCommand('nmap','127.0.0.1','-O')
+#runCommand('nmap','127.0.0.1','-F')
