@@ -1,8 +1,21 @@
-import subprocess
+import subprocess 
 
-mycmd="nmap"
-myarg1=input("Enter ip range ") #"192.168.1.1-5"
-myarg2="-p " +input("Enter port range ") #"10-30"
+def runCommand(cmd,arg1,arg2):
+    process = subprocess.Popen([cmd,arg1,arg2], 
+                           stdout=subprocess.PIPE,
+                           universal_newlines=True)
 
-out=subprocess.check_output([mycmd,myarg1,myarg2])
-print(out.decode("utf-8"))
+    while True:
+        output = process.stdout.readline()
+        print(output.strip())
+        # Do something else
+        return_code = process.poll()
+        if return_code is not None:
+            print('RETURN CODE', return_code)
+            # Process has finished, read rest of the output 
+            for output in process.stdout.readlines():
+                print(output.strip())
+            break
+
+runCommand('nmap','192.168.43.225-230','-p 10-30')
+runCommand('nmap','-O','127.0.0.1')
