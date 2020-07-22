@@ -1,5 +1,6 @@
 import subprocess
 import json
+import re
 
 
 oo="" #variable to store output
@@ -38,10 +39,11 @@ print("Output:")
 #print(oo)
 #Json
 # Data to be written
+def extract_ip(ip_str):
+    return re.search(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip_str).group()
 
-json_var={}
 
-
+json_var_ip={}
 
 line=""
 flagBlank=False
@@ -52,22 +54,25 @@ for char in oo:
         #print("-->"+line)
         if line.find("Nmap scan report for ")>=0:
             #print("ip-->" + line)
-            print("ip is "+line[21:])
-            json_var[line[21:]]="up"
+            ip_str=line[21:]
+            print("ip string is "+ ip_str)
+            ip=extract_ip(ip_str)
+            json_var_ip[ip]= {}
         if (len(line) < 1) and flagBlank == False:
-            print("blank-->" + line + str(flagBlank))
+            #print("blank-->" + line + str(flagBlank))
             flagBlank = True
         elif (len(line) < 1) and flagBlank == True:
-            print("blank-->" + line + str(flagBlank))
+            #print("blank-->" + line + str(flagBlank))
             flagBlank = False
         if flagBlank is True and len(line)>0 and line[0].isdigit():
             print(":::::::"+line)
+            json_var_ip[ip][line.split(' ')[0]]=[line.split(' ')[1],line.split(' ')[2]]
         line=""
 flagStart=False
 flagPort=False
 
 # Serializing json
-json_object = json.dumps(json_var, indent=4)
+json_object = json.dumps(json_var_ip, indent=4)
 
 # Writing to sample.json
 print("Json Output:\n")
