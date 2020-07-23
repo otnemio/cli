@@ -12,7 +12,7 @@ json_var_ip={}
 def extract_ip(ip_str):
     return re.search(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip_str).group()
 
-# run command to print output
+# run command to print output and store necessary part in a json format variable
 def runcommand(cmd, *argc):
     ip_info=""
     process = subprocess.Popen([cmd, argc],
@@ -38,12 +38,11 @@ def runcommand(cmd, *argc):
         return_code = process.poll()
         if return_code is not None:
             print('RETURN CODE', return_code)
-            # Process has finished, read rest of the output
+            # Process has finished, read rest of the output,
+            # nothing remains to be read from stdout so commented these lines
             # for output in process.stdout.readlines():
             #    print(output.strip())
             break
-
-
 
 
 # this is the function being called first
@@ -57,3 +56,4 @@ print("Json Output:\n")
 with open("sample.json", "w") as outfile:
     outfile.write(json_object)
 print(json_object)
+
