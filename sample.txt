@@ -1,0 +1,18 @@
+nmap 192.168.43.1-5 -p 22-80
+
+Host is up (0.045s latency).
+All 59 scanned ports on 192.168.43.2 are filtered
+
+nmap 192.168.43.1-5 -p 22-30
+
+Host is up (0.043s latency).
+PORT   STATE    SERVICE
+22/tcp filtered ssh
+23/tcp filtered telnet
+24/tcp filtered priv-mail
+25/tcp filtered smtp
+26/tcp filtered rsftp
+27/tcp filtered nsw-fe
+28/tcp filtered unknown
+29/tcp filtered msg-icp
+30/tcp filtered unknown
