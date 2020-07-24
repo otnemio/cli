@@ -3,16 +3,9 @@
 # https://avleonov.com/2018/03/11/converting-nmap-xml-scan-reports-to-json/
 
 import subprocess
-import re
 import json
 import xmltodict
 
-# variable for json output
-json_var_ip={}
-
-# Data to be written
-def extract_ip(ip_str):
-    return re.search(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip_str).group()
 
 # run command to print output and store necessary part in a json format variable
 def runcommand(cmd, *argc):
