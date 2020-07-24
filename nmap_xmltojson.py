@@ -24,11 +24,11 @@ def runcommand(cmd, *argc):
         output = process.stdout.readline()
         #Only print the output lines necessary
         if len(output.strip()) > 0:
-            if output.find("Ping Scan Timing: About") >= 0:  # extract percent for progress
+            if output.find("Ping Scan Timing: About") >= 0: # extract percent for Ping Scan progress
                 start = output.find("About") + 6  # starting location of percent done
                 end = output.find("done") - 1  # ending location of percent done
                 print(f"Ping::{output.strip()[start:end]}::")# fetch return code from Process
-            elif output.find("Stealth Scan Timing: About") >= 0:
+            elif output.find("Stealth Scan Timing: About") >= 0: # extract percent for Stealth Scan progress
                 start = output.find("About") + 6  # starting location of percent done
                 end = output.find("done") - 1  # ending location of percent done
                 print(f"Stealth::{output.strip()[start:end]}::")  # fetch return code from Process
